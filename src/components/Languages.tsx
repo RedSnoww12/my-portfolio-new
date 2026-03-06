@@ -1,6 +1,5 @@
 "use client";
 
-import { languages } from "@/data/resume";
 import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function Languages() {
@@ -17,7 +16,7 @@ export default function Languages() {
         </p>
 
         <div className="mx-auto grid max-w-md gap-6 sm:grid-cols-2">
-          {languages.map((lang) => (
+          {t.languages.items.map((lang) => (
             <div
               key={lang.name}
               className="group flex items-center gap-4 rounded-2xl border border-card-border bg-card p-6 transition-colors hover:border-accent/40"

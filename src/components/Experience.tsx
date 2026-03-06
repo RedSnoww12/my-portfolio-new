@@ -2,7 +2,6 @@
 
 import { Briefcase } from "lucide-react";
 import { motion } from "framer-motion";
-import { experiences } from "@/data/resume";
 import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function Experience() {
@@ -23,7 +22,7 @@ export default function Experience() {
           <div className="absolute left-[19px] top-2 bottom-2 w-px bg-card-border md:left-1/2 md:-translate-x-px" />
 
           <div className="flex flex-col gap-12">
-            {experiences.map((exp, i) => (
+            {t.experience.items.map((exp, i) => (
               <motion.div
                 key={exp.company}
                 initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}

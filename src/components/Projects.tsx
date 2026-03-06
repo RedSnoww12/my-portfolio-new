@@ -2,7 +2,6 @@
 
 import { Github } from "lucide-react";
 import { motion } from "framer-motion";
-import { projects } from "@/data/resume";
 import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function Projects() {
@@ -19,7 +18,7 @@ export default function Projects() {
         </p>
 
         <div className="grid gap-8 md:grid-cols-2">
-          {projects.map((project, i) => (
+          {t.projects.items.map((project, i) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
@@ -36,7 +35,7 @@ export default function Projects() {
                     {project.role} | {project.period}
                   </p>
                 </div>
-                {project.github && (
+                {"github" in project && project.github && (
                   <a
                     href={project.github}
                     target="_blank"

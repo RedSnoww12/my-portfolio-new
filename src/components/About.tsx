@@ -1,7 +1,6 @@
 "use client";
 
 import { Code2, Server, Cloud, GraduationCap } from "lucide-react";
-import { education } from "@/data/resume";
 import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function About() {
@@ -13,6 +12,8 @@ export default function About() {
     { icon: Cloud, title: t.about.devops, desc: t.about.devopsDesc },
     { icon: GraduationCap, title: t.about.methods, desc: t.about.methodsDesc },
   ];
+
+  const edu = t.about.education;
 
   return (
     <section id="about" className="px-4 py-24 sm:px-6">
@@ -41,9 +42,9 @@ export default function About() {
 
         <div className="rounded-2xl border border-card-border bg-card p-8 text-center">
           <GraduationCap className="mx-auto mb-4 text-accent" size={32} />
-          <h3 className="mb-1 text-lg font-semibold text-foreground">{education.degree}</h3>
-          <p className="text-accent">{education.school} | {education.period}</p>
-          <p className="mt-2 text-sm text-muted">{education.description}</p>
+          <h3 className="mb-1 text-lg font-semibold text-foreground">{edu.degree}</h3>
+          <p className="text-accent">{edu.school} | {edu.period}</p>
+          <p className="mt-2 text-sm text-muted">{edu.description}</p>
         </div>
       </div>
     </section>
