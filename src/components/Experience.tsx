@@ -1,15 +1,21 @@
+"use client";
+
 import { Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
 import { experiences } from "@/data/resume";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function Experience() {
+  const { t } = useLocale();
+
   return (
     <section id="experience" className="px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-4xl">
         <h2 className="mb-2 text-center text-sm font-medium uppercase tracking-widest text-accent">
-          Experience
+          {t.experience.subtitle}
         </h2>
         <p className="mb-12 text-center text-3xl font-bold text-foreground md:text-4xl">
-          Parcours professionnel
+          {t.experience.title}
         </p>
 
         <div className="relative">
@@ -18,8 +24,12 @@ export default function Experience() {
 
           <div className="flex flex-col gap-12">
             {experiences.map((exp, i) => (
-              <div
+              <motion.div
                 key={exp.company}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.2 }}
                 className={`relative flex flex-col md:flex-row ${
                   i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
@@ -69,7 +79,7 @@ export default function Experience() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

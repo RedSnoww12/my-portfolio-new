@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { skills, skillCategories, type Skill } from "@/data/resume";
+import { motion, AnimatePresence } from "framer-motion";
+import { skills, type Skill } from "@/data/resume";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 function SkillBar({ skill }: { skill: Skill }) {
   return (
@@ -11,9 +13,12 @@ function SkillBar({ skill }: { skill: Skill }) {
         <span className="text-xs text-muted">{skill.level}/5</span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-card-border">
-        <div
-          className="h-full rounded-full bg-gradient-to-r from-accent to-blue-400 transition-all duration-700 group-hover:brightness-125"
-          style={{ width: `${(skill.level / 5) * 100}%` }}
+        <motion.div
+          className="h-full rounded-full bg-gradient-to-r from-accent to-blue-400 group-hover:brightness-125"
+          initial={{ width: 0 }}
+          whileInView={{ width: `${(skill.level / 5) * 100}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         />
       </div>
     </div>
@@ -21,21 +26,22 @@ function SkillBar({ skill }: { skill: Skill }) {
 }
 
 export default function Skills() {
-  const categories = Object.keys(skillCategories);
+  const { t } = useLocale();
+  const categoryKeys = ["languages", "frameworks", "devops", "databases", "methods", "tools"] as const;
   const [active, setActive] = useState<string | null>(null);
 
   const filtered = active
-    ? categories.filter((c) => c === active)
-    : categories;
+    ? categoryKeys.filter((c) => c === active)
+    : categoryKeys;
 
   return (
     <section id="skills" className="px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <h2 className="mb-2 text-center text-sm font-medium uppercase tracking-widest text-accent">
-          Competences
+          {t.skills.subtitle}
         </h2>
         <p className="mb-8 text-center text-3xl font-bold text-foreground md:text-4xl">
-          Stack technique
+          {t.skills.title}
         </p>
 
         {/* Filters */}
@@ -48,9 +54,9 @@ export default function Skills() {
                 : "border border-card-border text-muted hover:border-accent hover:text-accent"
             }`}
           >
-            Toutes
+            {t.skills.all}
           </button>
-          {categories.map((cat) => (
+          {categoryKeys.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(active === cat ? null : cat)}
@@ -60,31 +66,38 @@ export default function Skills() {
                   : "border border-card-border text-muted hover:border-accent hover:text-accent"
               }`}
             >
-              {skillCategories[cat]}
+              {t.skills.categories[cat]}
             </button>
           ))}
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((cat) => {
-            const catSkills = skills.filter((s) => s.category === cat);
-            return (
-              <div
-                key={cat}
-                className="rounded-2xl border border-card-border bg-card p-6 transition-all duration-300"
-              >
-                <h3 className="mb-5 text-lg font-semibold text-foreground">
-                  {skillCategories[cat]}
-                </h3>
-                <div className="flex flex-col gap-4">
-                  {catSkills.map((skill) => (
-                    <SkillBar key={skill.name} skill={skill} />
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <motion.div layout className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((cat) => {
+              const catSkills = skills.filter((s) => s.category === cat);
+              return (
+                <motion.div
+                  key={cat}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="rounded-2xl border border-card-border bg-card p-6"
+                >
+                  <h3 className="mb-5 text-lg font-semibold text-foreground">
+                    {t.skills.categories[cat]}
+                  </h3>
+                  <div className="flex flex-col gap-4">
+                    {catSkills.map((skill) => (
+                      <SkillBar key={skill.name} skill={skill} />
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

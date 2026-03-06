@@ -1,14 +1,19 @@
+"use client";
+
 import { languages } from "@/data/resume";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function Languages() {
+  const { t } = useLocale();
+
   return (
     <section id="languages" className="px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-4xl">
         <h2 className="mb-2 text-center text-sm font-medium uppercase tracking-widest text-accent">
-          Langues
+          {t.languages.subtitle}
         </h2>
         <p className="mb-12 text-center text-3xl font-bold text-foreground md:text-4xl">
-          Langues parlees
+          {t.languages.title}
         </p>
 
         <div className="mx-auto grid max-w-md gap-6 sm:grid-cols-2">

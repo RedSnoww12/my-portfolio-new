@@ -1,7 +1,13 @@
+"use client";
+
 import { Github, Linkedin, MapPin, ChevronDown, Download } from "lucide-react";
+import { motion } from "framer-motion";
 import { personalInfo } from "@/data/resume";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function Hero() {
+  const { t } = useLocale();
+
   return (
     <section
       id="hero"
@@ -14,31 +20,56 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-3xl">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-card-border bg-card px-4 py-1.5 text-sm text-muted">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-4 inline-flex items-center gap-2 rounded-full border border-card-border bg-card px-4 py-1.5 text-sm text-muted"
+        >
           <MapPin size={14} />
           {personalInfo.location}
-        </div>
+        </motion.div>
 
-        <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-7xl">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-7xl"
+        >
           {personalInfo.name}
-        </h1>
+        </motion.h1>
 
-        <p className="mb-2 text-xl text-accent md:text-2xl">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-2 text-xl text-accent md:text-2xl"
+        >
           {personalInfo.title}
-        </p>
+        </motion.p>
 
-        <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-muted md:text-lg"
+        >
           {personalInfo.bio}
-        </p>
+        </motion.p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4"
+        >
           <a
             href="/cv.pdf"
             download
             className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-transform hover:scale-105 hover:brightness-110 sm:px-6 sm:py-3"
           >
             <Download size={18} />
-            Mon CV
+            {t.hero.downloadCv}
           </a>
           <a
             href={personalInfo.github}
@@ -58,16 +89,19 @@ export default function Hero() {
             <Linkedin size={18} />
             LinkedIn
           </a>
-        </div>
+        </motion.div>
       </div>
 
-      <a
+      <motion.a
         href="#about"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
         className="absolute bottom-10 animate-bounce text-muted transition-colors hover:text-foreground"
         aria-label="Scroll down"
       >
         <ChevronDown size={28} />
-      </a>
+      </motion.a>
     </section>
   );
 }

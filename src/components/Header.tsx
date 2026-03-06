@@ -1,22 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Globe } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
-
-const navLinks = [
-  { label: "Accueil", href: "#hero" },
-  { label: "A propos", href: "#about" },
-  { label: "Competences", href: "#skills" },
-  { label: "Projets", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
-];
+import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggle } = useTheme();
+  const { locale, t, toggleLocale } = useLocale();
+
+  const navLinks = [
+    { label: t.nav.home, href: "#hero" },
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.skills, href: "#skills" },
+    { label: t.nav.projects, href: "#projects" },
+    { label: t.nav.experience, href: "#experience" },
+    { label: t.nav.contact, href: "#contact" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -49,7 +51,15 @@ export default function Header() {
               </a>
             </li>
           ))}
-          <li>
+          <li className="flex items-center gap-1">
+            <button
+              onClick={toggleLocale}
+              aria-label="Toggle language"
+              className="flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-accent-muted hover:text-foreground"
+            >
+              <Globe size={16} />
+              {locale.toUpperCase()}
+            </button>
             <button
               onClick={toggle}
               aria-label="Toggle theme"
@@ -61,7 +71,15 @@ export default function Header() {
         </ul>
 
         {/* Mobile buttons */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-1 md:hidden">
+          <button
+            onClick={toggleLocale}
+            aria-label="Toggle language"
+            className="flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs font-medium text-muted transition-colors hover:text-foreground"
+          >
+            <Globe size={16} />
+            {locale.toUpperCase()}
+          </button>
           <button
             onClick={toggle}
             aria-label="Toggle theme"

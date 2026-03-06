@@ -1,38 +1,27 @@
+"use client";
+
 import { Code2, Server, Cloud, GraduationCap } from "lucide-react";
 import { education } from "@/data/resume";
-
-const highlights = [
-  {
-    icon: Code2,
-    title: "Front-End",
-    desc: "React, React Native, Angular, TypeScript",
-  },
-  {
-    icon: Server,
-    title: "Back-End",
-    desc: "Java 21, Spring Boot, Spring Security, JPA",
-  },
-  {
-    icon: Cloud,
-    title: "DevOps",
-    desc: "Docker, Kubernetes, CI/CD, Monitoring",
-  },
-  {
-    icon: GraduationCap,
-    title: "Methodologies",
-    desc: "Scrum, TDD, Clean Code, SOLID, BDD",
-  },
-];
+import { useLocale } from "@/i18n/LocaleProvider";
 
 export default function About() {
+  const { t } = useLocale();
+
+  const highlights = [
+    { icon: Code2, title: t.about.frontend, desc: t.about.frontendDesc },
+    { icon: Server, title: t.about.backend, desc: t.about.backendDesc },
+    { icon: Cloud, title: t.about.devops, desc: t.about.devopsDesc },
+    { icon: GraduationCap, title: t.about.methods, desc: t.about.methodsDesc },
+  ];
+
   return (
     <section id="about" className="px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <h2 className="mb-2 text-center text-sm font-medium uppercase tracking-widest text-accent">
-          A propos
+          {t.about.subtitle}
         </h2>
         <p className="mb-12 text-center text-3xl font-bold text-foreground md:text-4xl">
-          Mon profil
+          {t.about.title}
         </p>
 
         <div className="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
