@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "Sacha AMARA",
   title: "Developpeur Full-Stack Java / React & DevOps",
-  bio: "3 ans d'experience en developpement applicatif Java et React, integration continue (CI/CD) et DevOps. Passionne par les principes SOLID, le Clean Code et le TDD, j'aime collaborer au sein d'equipes dynamiques pour relever des defis techniques et innover.",
+  bio: "5 ans d'experience en developpement applicatif Java et React, integration continue (CI/CD) et DevOps. Passionne par les principes SOLID, le Clean Code et le TDD, j'aime collaborer au sein d'equipes dynamiques pour relever des defis techniques et innover.",
   email: "amarasacha2@gmail.com",
   github: "https://github.com/RedSnoww12",
   linkedin: "https://www.linkedin.com/in/sacha-amara-pirollo-77320b1a8/",
