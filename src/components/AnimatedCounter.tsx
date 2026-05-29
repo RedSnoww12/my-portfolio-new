@@ -44,12 +44,12 @@ export default function AnimatedCounter({ end, suffix = "", label }: AnimatedCou
   }, [end]);
 
   return (
-    <div ref={ref} className="text-center">
-      <p className="text-4xl font-bold text-foreground md:text-5xl">
+    <div ref={ref} className="px-4 py-6 text-center sm:py-8">
+      <p className="tabular text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
         {count}
         <span className="text-accent">{suffix}</span>
       </p>
-      <p className="mt-2 text-sm text-muted">{label}</p>
+      <p className="mt-2 font-mono text-xs uppercase tracking-[0.15em] text-muted">{label}</p>
     </div>
   );
 }

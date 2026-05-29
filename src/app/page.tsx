@@ -9,7 +9,6 @@ import Languages from "@/components/Languages";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
-import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
   return (
@@ -17,27 +16,13 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <ScrollReveal>
-          <Stats />
-        </ScrollReveal>
-        <ScrollReveal>
-          <About />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Skills />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Projects />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Experience />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Languages />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Contact />
-        </ScrollReveal>
+        <Stats />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Languages />
+        <Contact />
       </main>
       <Footer />
       <BackToTop />
