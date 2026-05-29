@@ -1,34 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
+  /* Dark (default) — editorial near-black */
+  --background: #0a0a0c;
+  --surface: #101013;
+  --surface-2: #16161a;
   --foreground: #fafafa;
-  --card: #18181b80;
-  --card-border: #27272a;
-  --muted: #a1a1aa;
-  --accent: #3b82f6;
-  --accent-muted: rgba(59, 130, 246, 0.1);
-  --accent-hover: rgba(59, 130, 246, 0.2);
+  --card: #101013;
+  --card-border: #232329;
+  --hairline: #1c1c21;
+  --muted: #8b8b95;
+  --accent: #3b6fff;
+  --accent-strong: #5a85ff;
+  --accent-foreground: #ffffff;
+  --accent-muted: rgba(59, 111, 255, 0.12);
+  --accent-hover: rgba(59, 111, 255, 0.22);
+  --grid-dot: rgba(255, 255, 255, 0.04);
 }
 
 html.light {
-  --background: #f4f4f5;
-  --foreground: #09090b;
-  --card: rgba(255, 255, 255, 0.8);
-  --card-border: #d4d4d8;
-  --muted: #52525b;
-  --accent: #2563eb;
-  --accent-muted: rgba(37, 99, 235, 0.08);
-  --accent-hover: rgba(37, 99, 235, 0.15);
+  --background: #f7f7f8;
+  --surface: #ffffff;
+  --surface-2: #f1f1f3;
+  --foreground: #0a0a0c;
+  --card: #ffffff;
+  --card-border: #e3e3e7;
+  --hairline: #e8e8ec;
+  --muted: #5b5b66;
+  --accent: #2557e6;
+  --accent-strong: #1d49c9;
+  --accent-foreground: #ffffff;
+  --accent-muted: rgba(37, 87, 230, 0.08);
+  --accent-hover: rgba(37, 87, 230, 0.16);
+  --grid-dot: rgba(10, 10, 12, 0.05);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-border: var(--card-border);
+  --color-hairline: var(--hairline);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-foreground: var(--accent-foreground);
   --color-accent-muted: var(--accent-muted);
   --color-accent-hover: var(--accent-hover);
   --font-sans: var(--font-geist-sans);
@@ -38,6 +56,8 @@ html.light {
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
+  /* offset for fixed header on anchor jumps */
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -45,5 +65,34 @@ body {
   color: var(--foreground);
   overflow-x: hidden;
   transition: background-color 0.3s, color 0.3s;
+  font-feature-settings: "ss01", "cv01";
 }
 
+/* Subtle editorial dotted grid — replaces blurred blobs */
+.grid-bg {
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Hairline divider used in section headers */
+.hairline {
+  border-color: var(--hairline);
+}
+
+/* Tabular figures for stats / numbers */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

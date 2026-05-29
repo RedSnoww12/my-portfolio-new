@@ -15,7 +15,7 @@ export default function Stats() {
 
   return (
     <section className="px-4 py-16 sm:px-6">
-      <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 md:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 divide-x divide-y divide-hairline border-y border-hairline sm:divide-y-0 md:grid-cols-4">
         {stats.map((stat) => (
           <AnimatedCounter key={stat.label} {...stat} />
         ))}

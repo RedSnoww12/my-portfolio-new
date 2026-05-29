@@ -1,8 +1,9 @@
 "use client";
 
-import { Github } from "lucide-react";
+import { Github, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLocale } from "@/i18n/LocaleProvider";
+import SectionHeading from "./SectionHeading";
 
 export default function Projects() {
   const { t } = useLocale();
@@ -10,29 +11,28 @@ export default function Projects() {
   return (
     <section id="projects" className="px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
-        <h2 className="mb-2 text-center text-sm font-medium uppercase tracking-widest text-accent">
-          {t.projects.subtitle}
-        </h2>
-        <p className="mb-12 text-center text-3xl font-bold text-foreground md:text-4xl">
-          {t.projects.title}
-        </p>
+        <SectionHeading index="03" eyebrow={t.projects.subtitle} title={t.projects.title} />
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2">
           {t.projects.items.map((project, i) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              whileHover={{ y: -4 }}
-              className="group flex flex-col rounded-2xl border border-card-border bg-card p-5 transition-colors hover:border-accent/40 sm:p-8"
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
+              className="group relative flex flex-col rounded-lg border border-card-border bg-card p-6 transition-colors duration-300 hover:border-accent/50 sm:p-8"
             >
-              <div className="mb-4 flex items-start justify-between">
+              <div className="mb-4 flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-bold text-foreground">{project.title}</h3>
-                  <p className="text-sm text-accent">
-                    {project.role} | {project.period}
+                  <span className="tabular font-mono text-xs text-muted/60">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
+                    {project.title}
+                  </h3>
+                  <p className="mt-0.5 font-mono text-sm text-accent">
+                    {project.role} · {project.period}
                   </p>
                 </div>
                 {"github" in project && project.github && (
@@ -40,18 +40,18 @@ export default function Projects() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted transition-colors hover:text-foreground"
+                    className="flex-shrink-0 cursor-pointer rounded-md border border-card-border p-2 text-muted transition-colors hover:border-accent hover:text-accent"
                     aria-label={`GitHub ${project.title}`}
                   >
-                    <Github size={20} />
+                    <Github size={18} />
                   </a>
                 )}
               </div>
 
-              <ul className="mb-6 flex-1 space-y-2">
+              <ul className="mb-6 flex-1 space-y-2.5">
                 {project.description.map((desc, j) => (
-                  <li key={j} className="flex gap-2 text-sm leading-relaxed text-muted">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent" />
+                  <li key={j} className="flex gap-2.5 text-sm leading-relaxed text-muted">
+                    <ArrowUpRight size={15} className="mt-0.5 flex-shrink-0 text-accent" />
                     {desc}
                   </li>
                 ))}
@@ -61,7 +61,7 @@ export default function Projects() {
                 {project.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="rounded-full bg-accent-muted px-3 py-1 text-xs font-medium text-accent"
+                    className="rounded-md border border-card-border bg-surface-2 px-2.5 py-1 font-mono text-xs text-muted transition-colors group-hover:border-accent/30"
                   >
                     {skill}
                   </span>
